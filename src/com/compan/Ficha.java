@@ -13,6 +13,14 @@ public class Ficha {
         return String.valueOf(tipoFicha.getCaracterFicha());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ficha ficha = (Ficha) o;
+        return tipoFicha.getCaracterFicha() == ficha.tipoFicha.getCaracterFicha();
+    }
+
     public enum TipoFicha {
         BLANCA('☻'),
         NEGRA('☺');

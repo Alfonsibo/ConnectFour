@@ -42,32 +42,32 @@ public class Tablero {
                     Ficha tFicha = matrizTablero[filas][columnas];
 
                     if (columnas <= matrizTablero[filas].length - 4
-                            && tFicha == matrizTablero[filas][columnas + 1]
-                            && tFicha == matrizTablero[filas][columnas + 2]
-                            && tFicha == matrizTablero[filas][columnas + 3]) {
+                            && tFicha.equals(matrizTablero[filas][columnas + 1])
+                            && tFicha.equals(matrizTablero[filas][columnas + 2])
+                            && tFicha.equals(matrizTablero[filas][columnas + 3])) {
                         return true;
                     }
 
                     if (filas <= matrizTablero.length - 4
-                            && tFicha == matrizTablero[filas + 1][columnas]
-                            && tFicha == matrizTablero[filas + 2][columnas]
-                            && tFicha == matrizTablero[filas + 3][columnas]) {
+                            && tFicha.equals(matrizTablero[filas + 1][columnas])
+                            && tFicha.equals(matrizTablero[filas + 2][columnas])
+                            && tFicha.equals(matrizTablero[filas + 3][columnas])) {
                         return true;
                     }
 
                     if (filas <= matrizTablero.length - 4 && columnas <= matrizTablero[filas].length - 4) {
-                        if (tFicha == matrizTablero[filas + 1][columnas + 1]
-                                && tFicha == matrizTablero[filas + 2][columnas + 2]
-                                && tFicha == matrizTablero[filas + 3][columnas + 3]) {
+                        if (tFicha.equals(matrizTablero[filas + 1][columnas + 1])
+                                && tFicha.equals(matrizTablero[filas + 2][columnas + 2])
+                                && tFicha.equals(matrizTablero[filas + 3][columnas + 3])) {
                             return true;
                         }
                     }
 
                     if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
                         // If the current element equals each element diagonally to the bottom left
-                        if (tFicha == matrizTablero[filas + 1][columnas - 1]
-                                && tFicha == matrizTablero[filas + 2][columnas - 2]
-                                && tFicha == matrizTablero[filas + 3][columnas - 3]) {
+                        if (tFicha.equals(matrizTablero[filas + 1][columnas - 1])
+                                && tFicha.equals(matrizTablero[filas + 2][columnas - 2])
+                                && tFicha.equals(matrizTablero[filas + 3][columnas - 3])) {
                             return true;
                         }
                     }
