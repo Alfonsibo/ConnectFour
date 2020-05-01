@@ -83,7 +83,7 @@ public class Tablero {
         for (int filas = matrizTablero.length - 1; filas >= 0; filas--) {
             for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
                 if (matrizTablero[filas][columnas] == '\u0000') {
-                    cadena += "| o ";
+                    cadena += "|  ";
                 } else {
                     cadena += "|" + matrizTablero[filas][columnas];
                 }
