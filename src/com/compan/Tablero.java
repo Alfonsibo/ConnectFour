@@ -19,7 +19,7 @@ public class Tablero {
      * @return boolean false en caso de que no haya espacio en la columna para insertar la ficha o true en caso contrario.
      */
     public boolean insertarFichaEnTablero(Ficha ficha, int columna) {
-        if (matrizTablero[columna][MAXIMO_NUMERO_COLUMNAS - 1] == null) {
+        if (matrizTablero[MAXIMO_NUMERO_FILAS - 1][columna] == null) {
             insertarFichaEnColumna(ficha, columna);
             return true;
         } else {
@@ -28,14 +28,15 @@ public class Tablero {
     }
 
     private void insertarFichaEnColumna(Ficha ficha, int columna) {
-        for (int i = 0; i < matrizTablero[columna].length; i++) {
-            if (matrizTablero[columna][i] == null) {
-                matrizTablero[columna][i] = ficha;
+        for (int filas = 0; filas < matrizTablero.length; filas++) {
+            if (matrizTablero[filas][columna] == null) {
+                matrizTablero[filas][columna] = ficha;
+                break;
             }
         }
     }
 
-    public boolean comprobarFichasConectadas(Ficha ficha, int columnaFichaInsertada) {
+    public boolean comprobarFichasConectadas(int columnaFichaInsertada) {
         if (columnaFichaInsertada > 3) {
             for (int filas = 0; filas < matrizTablero.length; filas++) {
                 for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
@@ -64,7 +65,6 @@ public class Tablero {
                     }
 
                     if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
-                        // If the current element equals each element diagonally to the bottom left
                         if (tFicha.equals(matrizTablero[filas + 1][columnas - 1])
                                 && tFicha.equals(matrizTablero[filas + 2][columnas - 2])
                                 && tFicha.equals(matrizTablero[filas + 3][columnas - 3])) {
@@ -80,16 +80,16 @@ public class Tablero {
 
     @Override
     public String toString() {
-        String cadena = "_________________________________\n";
-        for (int filas = 0; filas < matrizTablero.length; filas++) {
+        String cadena = "_________________________________________\n";
+        for (int filas = matrizTablero.length - 1; filas >= 0; filas--) {
             for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
                 if (matrizTablero[filas][columnas] == null) {
-                    cadena += "|   ";
+                    cadena += "|    ";
                 } else {
                     cadena += "| " + matrizTablero[filas][columnas] + " ";
                 }
             }
-            cadena += "|\n_________________________________\n";
+            cadena += "|\n_________________________________________\n";
         }
         return cadena;
     }

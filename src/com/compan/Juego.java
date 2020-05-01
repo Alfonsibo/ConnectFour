@@ -14,6 +14,8 @@ public class Juego {
     private Jugador jugadorGanador;
     private int turnos = 0;
 
+    Scanner scanner = new Scanner(System.in);
+
     public Juego() {
         tablero = new Tablero();
         jugadores = new Jugador[NUMERO_JUGADORES];
@@ -33,10 +35,20 @@ public class Juego {
             System.out.println(tablero);
             turnos++;
         }
+        scanner.close();
+        terminarJuego();
+    }
+
+    private void terminarJuego() {
+        if (jugadorGanador != null) {
+            System.out.println("Ha ganado " + jugadorGanador);
+        } else {
+            System.out.println("Los jugadores han quedado empate.");
+        }
     }
 
     private void comprobarGanador(int columnaFichaInsertada) {
-        if (turnos > 5 && tablero.comprobarFichasConectadas(jugadorActual.getFicha(), columnaFichaInsertada)) {
+        if (turnos > 5 && tablero.comprobarFichasConectadas(columnaFichaInsertada)) {
             jugadorGanador = jugadorActual;
         }
     }
@@ -59,35 +71,34 @@ public class Juego {
 
     private String obtenerNombreJugador(int numeroJugador) {
         System.out.println("Jugador " + numeroJugador + " elige tu nombre: ");
-
-        Scanner scanner = new Scanner(System.in);
-        String nombre = scanner.next();
-        scanner.close();
-        return nombre;
+        return scanner.nextLine();
     }
 
     private void meterFicha() {
         int columna = obtenerColumnaFicha();
-        tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
-        comprobarGanador(columna);
+        boolean fichaInsertada = tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
+        while(!fichaInsertada) {
+            System.out.print("La columna " + (columna + 1)  + " ya esta llena. ");
+            columna = obtenerColumnaFicha();
+            fichaInsertada = tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
+        }
+
+        //comprobarGanador(columna);
     }
 
-    private byte obtenerColumnaFicha() {
-        System.out.println("Introduzca la columna donde va a insertar ficha " + jugadorActual);
-        byte columna = leerColumna();
+    private int obtenerColumnaFicha() {
+        System.out.println("Introduzca la columna donde va a insertar ficha " + jugadorActual + ":");
+        int columna = leerColumna();
         while (columna < 1 || columna > Tablero.MAXIMO_NUMERO_COLUMNAS) {
             System.out.println("Numero de columna erroneo " + jugadorActual
-                    + ", introduzca un valor comprendido entre 1 y " + Tablero.MAXIMO_NUMERO_COLUMNAS);
+                    + ", introduzca un valor comprendido entre 1 y " + Tablero.MAXIMO_NUMERO_COLUMNAS + ": ");
             columna = leerColumna();
         }
-        return columna;
+        return columna - 1;
     }
 
-    private byte leerColumna() {
-        Scanner scanner = new Scanner(System.in);
-        byte b = scanner.nextByte();
-        scanner.close();
-        return b;
+    private int leerColumna() {
+        return scanner.nextInt();
     }
 
 }
