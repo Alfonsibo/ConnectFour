@@ -6,7 +6,7 @@ public enum TipoFicha {
 
     private final char caracterFicha;
 
-    private TipoFicha(char caracterFicha) {
+    TipoFicha(char caracterFicha) {
         this.caracterFicha = caracterFicha;
     }
 

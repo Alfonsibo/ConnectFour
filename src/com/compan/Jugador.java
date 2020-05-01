@@ -2,8 +2,8 @@ package com.compan;
 
 public class Jugador {
 
-    private char ficha;
-    private String nombre;
+    private final char ficha;
+    private final String nombre;
 
     public Jugador(char ficha, String nombre) {
         this.ficha = ficha;

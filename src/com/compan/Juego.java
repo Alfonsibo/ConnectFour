@@ -77,8 +77,8 @@ public class Juego {
     private void meterFicha() {
         int columna = obtenerColumnaFicha();
         boolean fichaInsertada = tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
-        while(!fichaInsertada) {
-            System.out.print("La columna " + (columna + 1)  + " ya esta llena. ");
+        while (!fichaInsertada) {
+            System.out.print("La columna " + (columna + 1) + " ya esta llena. ");
             columna = obtenerColumnaFicha();
             fichaInsertada = tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
         }

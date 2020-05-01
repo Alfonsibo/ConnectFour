@@ -5,7 +5,7 @@ public class Tablero {
     public static final byte MAXIMO_NUMERO_COLUMNAS = 8;
     public static final byte MAXIMO_NUMERO_FILAS = 6;
 
-    private char[][] matrizTablero;
+    private final char[][] matrizTablero;
 
     public Tablero() {
         matrizTablero = new char[MAXIMO_NUMERO_FILAS][MAXIMO_NUMERO_COLUMNAS];
@@ -42,34 +42,34 @@ public class Tablero {
 
                 // This is the current element in our matrix
                 char tFicha = matrizTablero[filas][columnas];
-                if (tFicha != ficha)
-                    continue;
+                if (tFicha == ficha) {
 
-                if (columnas <= matrizTablero[filas].length - 4
-                        && ficha == matrizTablero[filas][columnas + 1]
-                        && ficha == matrizTablero[filas][columnas + 2]
-                        && ficha == matrizTablero[filas][columnas + 3])
-                    return true;
-
-                if (filas <= matrizTablero.length - 4
-                        && ficha == matrizTablero[filas + 1][columnas]
-                        && ficha == matrizTablero[filas + 2][columnas]
-                        && ficha == matrizTablero[filas + 3][columnas]) {
-                    return true;
-                }
-
-                if (filas <= matrizTablero.length - 4 && columnas <= matrizTablero[filas].length - 4) {
-                    if (ficha == matrizTablero[filas + 1][columnas + 1]
-                            && ficha == matrizTablero[filas + 2][columnas + 2]
-                            && ficha == matrizTablero[filas + 3][columnas + 3])
+                    if (columnas <= matrizTablero[filas].length - 4
+                            && ficha == matrizTablero[filas][columnas + 1]
+                            && ficha == matrizTablero[filas][columnas + 2]
+                            && ficha == matrizTablero[filas][columnas + 3])
                         return true;
-                }
 
-                if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
-                    if (ficha == matrizTablero[filas + 1][columnas - 1]
-                            && ficha == matrizTablero[filas + 2][columnas - 2]
-                            && ficha == matrizTablero[filas + 3][columnas - 3])
+                    if (filas <= matrizTablero.length - 4
+                            && ficha == matrizTablero[filas + 1][columnas]
+                            && ficha == matrizTablero[filas + 2][columnas]
+                            && ficha == matrizTablero[filas + 3][columnas]) {
                         return true;
+                    }
+
+                    if (filas <= matrizTablero.length - 4 && columnas <= matrizTablero[filas].length - 4) {
+                        if (ficha == matrizTablero[filas + 1][columnas + 1]
+                                && ficha == matrizTablero[filas + 2][columnas + 2]
+                                && ficha == matrizTablero[filas + 3][columnas + 3])
+                            return true;
+                    }
+
+                    if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
+                        if (ficha == matrizTablero[filas + 1][columnas - 1]
+                                && ficha == matrizTablero[filas + 2][columnas - 2]
+                                && ficha == matrizTablero[filas + 3][columnas - 3])
+                            return true;
+                    }
                 }
             }
         }
@@ -79,17 +79,17 @@ public class Tablero {
 
     @Override
     public String toString() {
-        String cadena = "_________________________\n";
+        StringBuilder cadena = new StringBuilder("_________________________\n");
         for (int filas = matrizTablero.length - 1; filas >= 0; filas--) {
             for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
                 if (matrizTablero[filas][columnas] == '\u0000') {
-                    cadena += "|  ";
+                    cadena.append("|  ");
                 } else {
-                    cadena += "|" + matrizTablero[filas][columnas];
+                    cadena.append("|").append(matrizTablero[filas][columnas]);
                 }
             }
-            cadena += "|\n_________________________\n";
+            cadena.append("|\n_________________________\n");
         }
-        return cadena;
+        return cadena.toString();
     }
 }
