@@ -10,7 +10,7 @@ public class Juego {
     private final Tablero tablero;
     private final Jugador[] jugadores;
 
-    private Jugador siguienteJugador;
+    private Jugador jugadorActual;
     private Jugador jugadorGanador;
     private int turnos = 0;
 
@@ -27,20 +27,18 @@ public class Juego {
 
     private void jugar() {
         while (turnos < Tablero.MAXIMO_NUMERO_COLUMNAS * Tablero.MAXIMO_NUMERO_FILAS && jugadorGanador == null) {
-            siguienteJugador = jugadores[turnos % 2];
+            jugadorActual = jugadores[turnos % 2];
             meterFicha();
 
             System.out.println(tablero);
-
-            if (turnos > 5) {
-                comprobarGanador();
-            }
             turnos++;
         }
     }
 
-    private void comprobarGanador() {
-        tablero.comprobarFichasConectadas(siguienteJugador.getFicha());
+    private void comprobarGanador(int columnaFichaInsertada) {
+        if (turnos > 5 && tablero.comprobarFichasConectadas(jugadorActual.getFicha(), columnaFichaInsertada)) {
+            jugadorGanador = jugadorActual;
+        }
     }
 
     private void crearJugadores() {
@@ -69,14 +67,16 @@ public class Juego {
     }
 
     private void meterFicha() {
-        tablero.insertarFichaEnTablero(siguienteJugador.getFicha(), obtenerColumnaFicha());
+        int columna = obtenerColumnaFicha();
+        tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
+        comprobarGanador(columna);
     }
 
     private byte obtenerColumnaFicha() {
-        System.out.println("Introduzca la columna donde va a insertar ficha " + siguienteJugador);
+        System.out.println("Introduzca la columna donde va a insertar ficha " + jugadorActual);
         byte columna = leerColumna();
         while (columna < 1 || columna > Tablero.MAXIMO_NUMERO_COLUMNAS) {
-            System.out.println("Numero de columna erroneo " + siguienteJugador
+            System.out.println("Numero de columna erroneo " + jugadorActual
                     + ", introduzca un valor comprendido entre 1 y " + Tablero.MAXIMO_NUMERO_COLUMNAS);
             columna = leerColumna();
         }
