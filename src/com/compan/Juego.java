@@ -47,8 +47,8 @@ public class Juego {
         }
     }
 
-    private void comprobarGanador(int columnaFichaInsertada) {
-        if (turnos > 5 && tablero.comprobarFichasConectadas(columnaFichaInsertada)) {
+    private void comprobarGanador() {
+        if (turnos > 5 && tablero.comprobarFichasConectadas()) {
             jugadorGanador = jugadorActual;
         }
     }
@@ -83,7 +83,7 @@ public class Juego {
             fichaInsertada = tablero.insertarFichaEnTablero(jugadorActual.getFicha(), columna);
         }
 
-        //comprobarGanador(columna);
+        comprobarGanador();
     }
 
     private int obtenerColumnaFicha() {

@@ -36,60 +36,60 @@ public class Tablero {
         }
     }
 
-    public boolean comprobarFichasConectadas(int columnaFichaInsertada) {
-        if (columnaFichaInsertada > 3) {
-            for (int filas = 0; filas < matrizTablero.length; filas++) {
-                for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
-                    Ficha tFicha = matrizTablero[filas][columnas];
+    public boolean comprobarFichasConectadas() {
+        for (int filas = 0; filas < matrizTablero.length; filas++) {
+            for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
 
-                    if (columnas <= matrizTablero[filas].length - 4
-                            && tFicha.equals(matrizTablero[filas][columnas + 1])
-                            && tFicha.equals(matrizTablero[filas][columnas + 2])
-                            && tFicha.equals(matrizTablero[filas][columnas + 3])) {
+                // This is the current element in our matrix
+                Ficha element = matrizTablero[filas][columnas];
+                if (element == null) {
+                    return false;
+                }
+
+                if (columnas <= matrizTablero[filas].length - 4
+                        && element.equals(matrizTablero[filas][columnas + 1])
+                        && element.equals(matrizTablero[filas][columnas + 2])
+                        && element.equals(matrizTablero[filas][columnas + 3]))
+                    return true;
+
+                if (filas <= matrizTablero.length - 4
+                        && element.equals(matrizTablero[filas + 1][columnas])
+                        && element.equals(matrizTablero[filas + 2][columnas])
+                        && element.equals(matrizTablero[filas + 3][columnas])) {
+                    return true;
+                }
+
+                if (filas <= matrizTablero.length - 4 && columnas <= matrizTablero[filas].length - 4) {
+                    if (element.equals(matrizTablero[filas + 1][columnas + 1])
+                            && element.equals(matrizTablero[filas + 2][columnas + 2])
+                            && element.equals(matrizTablero[filas + 3][columnas + 3]))
                         return true;
-                    }
+                }
 
-                    if (filas <= matrizTablero.length - 4
-                            && tFicha.equals(matrizTablero[filas + 1][columnas])
-                            && tFicha.equals(matrizTablero[filas + 2][columnas])
-                            && tFicha.equals(matrizTablero[filas + 3][columnas])) {
+                if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
+                    if (element.equals(matrizTablero[filas + 1][columnas - 1])
+                            && element.equals(matrizTablero[filas + 2][columnas - 2])
+                            && element.equals(matrizTablero[filas + 3][columnas - 3]))
                         return true;
-                    }
-
-                    if (filas <= matrizTablero.length - 4 && columnas <= matrizTablero[filas].length - 4) {
-                        if (tFicha.equals(matrizTablero[filas + 1][columnas + 1])
-                                && tFicha.equals(matrizTablero[filas + 2][columnas + 2])
-                                && tFicha.equals(matrizTablero[filas + 3][columnas + 3])) {
-                            return true;
-                        }
-                    }
-
-                    if (filas <= matrizTablero.length - 4 && columnas >= matrizTablero[filas].length - 4) {
-                        if (tFicha.equals(matrizTablero[filas + 1][columnas - 1])
-                                && tFicha.equals(matrizTablero[filas + 2][columnas - 2])
-                                && tFicha.equals(matrizTablero[filas + 3][columnas - 3])) {
-                            return true;
-                        }
-                    }
                 }
             }
         }
-        return false;
 
+        return false;
     }
 
     @Override
     public String toString() {
-        String cadena = "_________________________________________\n";
+        String cadena = "_________________________\n";
         for (int filas = matrizTablero.length - 1; filas >= 0; filas--) {
             for (int columnas = 0; columnas < matrizTablero[filas].length; columnas++) {
                 if (matrizTablero[filas][columnas] == null) {
-                    cadena += "|    ";
+                    cadena += "|  ";
                 } else {
-                    cadena += "| " + matrizTablero[filas][columnas] + " ";
+                    cadena += "|" + matrizTablero[filas][columnas];
                 }
             }
-            cadena += "|\n_________________________________________\n";
+            cadena += "|\n_________________________\n";
         }
         return cadena;
     }
