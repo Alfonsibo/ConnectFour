@@ -48,7 +48,7 @@ public class Juego {
     }
 
     private void comprobarGanador() {
-        if (turnos > 5 && tablero.comprobarFichasConectadas(jugadorActual.getFicha())) {
+        if (turnos > 5 && tablero.comprobarFichasConectadas(jugadorActual.getFicha())) { //Movimientos minimos para ganar 5
             jugadorGanador = jugadorActual;
         }
     }
