@@ -2,23 +2,29 @@ package com.compan;
 
 public class Ficha {
 
-    private char ficha;
+    private TipoFicha tipoFicha;
 
-    public Ficha(char ficha) {
-        this.ficha = ficha;
-    }
-
-    public char getFicha() {
-        return ficha;
-    }
-
-    public void setFicha(char ficha) {
-        this.ficha = ficha;
+    public Ficha(TipoFicha tipoFicha) {
+        this.tipoFicha = tipoFicha;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(ficha);
+        return String.valueOf(tipoFicha.getCaracterFicha());
     }
 
+    public enum TipoFicha {
+        BLANCA('☻'),
+        NEGRA('☺');
+
+        private final char caracterFicha;
+
+        private TipoFicha(char caracterFicha) {
+            this.caracterFicha = caracterFicha;
+        }
+
+        public char getCaracterFicha() {
+            return caracterFicha;
+        }
+    }
 }
