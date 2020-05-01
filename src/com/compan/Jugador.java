@@ -2,15 +2,15 @@ package com.compan;
 
 public class Jugador {
 
-    private Ficha ficha;
+    private char ficha;
     private String nombre;
 
-    public Jugador(Ficha ficha, String nombre) {
+    public Jugador(char ficha, String nombre) {
         this.ficha = ficha;
         this.nombre = nombre;
     }
 
-    public Ficha getFicha() {
+    public char getFicha() {
         return ficha;
     }
 

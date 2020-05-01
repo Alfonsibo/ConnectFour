@@ -48,7 +48,7 @@ public class Juego {
     }
 
     private void comprobarGanador() {
-        if (turnos > 5 && tablero.comprobarFichasConectadas()) {
+        if (turnos > 5 && tablero.comprobarFichasConectadas(jugadorActual.getFicha())) {
             jugadorGanador = jugadorActual;
         }
     }
@@ -63,9 +63,9 @@ public class Juego {
         String nombreJugador = obtenerNombreJugador(numeroJugador + 1);
 
         if (numeroJugador == 0) { //ES EL JUGADOR 1 Y VA CON NEGRAS
-            jugadores[numeroJugador] = new Jugador(new Ficha(Ficha.TipoFicha.NEGRA), nombreJugador);
+            jugadores[numeroJugador] = new Jugador(TipoFicha.NEGRA.getCaracterFicha(), nombreJugador);
         } else { //ES EL JUGADOR 2 Y VA CON BLANCAS
-            jugadores[numeroJugador] = new Jugador(new Ficha(Ficha.TipoFicha.BLANCA), nombreJugador);
+            jugadores[numeroJugador] = new Jugador(TipoFicha.BLANCA.getCaracterFicha(), nombreJugador);
         }
     }
 
